@@ -2,13 +2,36 @@ package auction.domain;
 
 import nl.fontys.util.Money;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity(name = "items")
+@NamedQueries({
+        @NamedQuery(name = "Item.getAll", query = "SELECT i FROM items as i"),
+        @NamedQuery(name = "Item.count", query = "SELECT count(i) FROM items as i"),
+        @NamedQuery(name = "Item.findById", query = "select i from items as i where i.id = :id"),
+        @NamedQuery(name = "Item.findByDescription", query = "select i from items as i where i.description = :description"),
+})
 public class Item implements Comparable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private User seller;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
+
     private String description;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Bid highest;
+
+    public Item() {
+
+    }
 
     public Item(User seller, Category category, String description) {
         this.seller = seller;
@@ -45,17 +68,45 @@ public class Item implements Comparable {
     }
 
     public int compareTo(Object arg0) {
-        //TODO
+        if(arg0 instanceof Item) {
+            Item oItem = (Item)arg0;
+            return oItem.getHighestBid().getAmount().compareTo(this.getHighestBid().getAmount());
+        }
+
         return -1;
     }
 
     public boolean equals(Object o) {
-        //TODO
-        return false;
+        if(o == null) {
+            return false;
+        }
+
+        if(!(o instanceof Item)) {
+            return false;
+        }
+
+        Item other = (Item)o;
+
+        if(this.getSeller() != other.getSeller()) {
+            return false;
+        }
+
+        if(this.getCategory() != other.getCategory()) {
+            return false;
+        }
+
+        if(!this.getDescription().equals(other.getDescription())) {
+            return false;
+        }
+
+        if(this.getHighestBid() != other.getHighestBid()) {
+            return false;
+        }
+
+        return true;
     }
 
     public int hashCode() {
-        //TODO
-        return 0;
+        return Objects.hash(seller, category, description, highest);
     }
 }

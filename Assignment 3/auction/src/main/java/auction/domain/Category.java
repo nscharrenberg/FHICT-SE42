@@ -1,10 +1,21 @@
 package auction.domain;
 
+import javax.persistence.*;
+
+@Entity(name = "categories")
+@NamedQueries({
+        @NamedQuery(name = "Category.getAll", query = "SELECT c FROM categories as c"),
+        @NamedQuery(name = "Category.count", query = "SELECT count(c) FROM categories as c"),
+})
 public class Category {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String description;
 
-    private Category() {
+    public Category() {
         description = "undefined";
     }
 

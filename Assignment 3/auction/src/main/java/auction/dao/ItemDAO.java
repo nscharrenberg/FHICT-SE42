@@ -34,7 +34,7 @@ public interface ItemDAO {
      *
      * @return list of item instances
      */
-    List<Item> findAll();
+    List findAll();
     /**
      *
      * @param description 
