@@ -2,16 +2,8 @@ package auction.domain;
 
 import javax.persistence.*;
 
-@Entity(name = "categories")
-@NamedQueries({
-        @NamedQuery(name = "Category.getAll", query = "SELECT c FROM categories as c"),
-        @NamedQuery(name = "Category.count", query = "SELECT count(c) FROM categories as c"),
-})
+@Embeddable
 public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String description;
 

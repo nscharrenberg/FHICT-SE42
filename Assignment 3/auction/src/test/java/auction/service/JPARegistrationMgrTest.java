@@ -27,10 +27,6 @@ public class JPARegistrationMgrTest {
         factory = Persistence.createEntityManagerFactory("auction");
         em = factory.createEntityManager();
         dbCleaner = new DatabaseCleaner(em);
-    }
-
-    @After
-    public void tearDown() throws Exception {
         dbCleaner.clean();
     }
 

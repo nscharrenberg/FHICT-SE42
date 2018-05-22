@@ -11,14 +11,13 @@ import javax.persistence.*;
         @NamedQuery(name = "Bid.count", query = "SELECT count(u) FROM bids as u"),
 })
 public class Bid {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private FontysTime time;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User buyer;
 
     private Money amount;

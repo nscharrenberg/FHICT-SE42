@@ -38,11 +38,12 @@ public class AuctionMgr  {
      * @return een lijst met items met @desciption. Eventueel lege lijst.
      */
     public List<Item> findItemByDescription(String description) {
-        if(description.isEmpty()) {
-            return new ArrayList<Item>();
+        if(!description.isEmpty()) {
+
+            return itemDao.findByDescription(description);
         }
 
-        return itemDao.findByDescription(description);
+        return new ArrayList<Item>();
     }
 
     /**

@@ -18,15 +18,19 @@ public class Item implements Comparable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User seller;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "description",
+                    column = @Column(name = "cat_description"))
+    })
     private Category category;
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Bid highest;
 
     public Item() {
