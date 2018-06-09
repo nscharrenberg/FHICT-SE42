@@ -1,5 +1,6 @@
 package auction.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import static org.junit.Assert.*;
 
@@ -9,13 +10,24 @@ import org.junit.Test;
 
 import auction.domain.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class RegistrationMgrTest {
 
     private RegistrationMgr registrationMgr;
+    private EntityManager em;
+    private EntityManagerFactory factory;
+    private util.DatabaseCleaner dbCleaner;
 
     @Before
     public void setUp() throws Exception {
         registrationMgr = new RegistrationMgr();
+        factory = Persistence.createEntityManagerFactory("auction");
+        em = factory.createEntityManager();
+        util.DatabaseCleaner dbCleaner = new util.DatabaseCleaner(em);
+        dbCleaner.clean();
     }
 
     @Test

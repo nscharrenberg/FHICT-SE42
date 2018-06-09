@@ -1,6 +1,7 @@
 package auction.domain;
 
 import nl.fontys.util.Money;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -32,10 +33,10 @@ public abstract class Item implements Comparable {
     private String description;
 
     @OneToOne(mappedBy = "item")
+    @JoinColumn(nullable = false)
     private Bid highest;
 
     public Item() {
-
     }
 
     public Item(User seller, Category category, String description) {

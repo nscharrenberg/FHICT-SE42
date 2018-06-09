@@ -17,20 +17,6 @@ public class SellerMgr {
     public SellerMgr() {
         this.itemDao = new ItemDAOJPAImpl(em);
     }
-
-    /**
-     * @param seller
-     * @param cat
-     * @param description
-     * @return het item aangeboden door seller, behorende tot de categorie cat
-     *         en met de beschrijving description
-     */
-    public Item offerItem(User seller, Category cat, String description) {
-//        Item newItem = new Item(seller, cat, description);
-//        itemDao.create(newItem);
-//        seller.addItemToSeller(newItem);
-        return null;
-    }
     
      /**
      * @param item

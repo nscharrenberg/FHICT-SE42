@@ -21,6 +21,10 @@ public class RegistrationMgr {
         userDAO = new UserDAOJPAImpl(em);
     }
 
+    public EntityManager getEntityManager() {
+        return em;
+    }
+
     /**
      * Registreert een gebruiker met het als parameter gegeven e-mailadres, mits
      * zo'n gebruiker nog niet bestaat.

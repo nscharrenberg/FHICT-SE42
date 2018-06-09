@@ -43,18 +43,13 @@ public class UserDAOJPAImpl implements UserDAO {
             throw new IllegalArgumentException();
         }
 
-        em.getTransaction().begin();
         em.merge(user);
-        em.getTransaction().commit();
     }
 
 
     @Override
     public List<User> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(User.class));
-
-        return em.createQuery(cq).getResultList();
+        return em.createNamedQuery("User.getAll", User.class).getResultList();
     }
 
     @Override
@@ -65,7 +60,7 @@ public class UserDAOJPAImpl implements UserDAO {
         try {
             return (User) query.getSingleResult();
         } catch(NoResultException ex) {
-            return null;
+            throw new NoResultException("No Results Found.");
         }
     }
 

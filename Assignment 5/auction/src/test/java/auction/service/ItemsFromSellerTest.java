@@ -36,7 +36,6 @@ public class ItemsFromSellerTest {
     @Test
  //   @Ignore
     public void numberOfOfferdItems() {
-
         String email = "ifu1@nl";
         String omsch1 = "omsch_ifu1";
         String omsch2 = "omsch_ifu2";
@@ -45,26 +44,16 @@ public class ItemsFromSellerTest {
         assertEquals(0, user1.numerOfOfferedItems());
 
         Category cat = new Category("cat2");
-        Item item1 = sellerMgr.offerItem(user1, cat, omsch1);
+        Item item1 = sellerMgr.offerFurniture(user1, cat, omsch1, "wood");
 
-       
-        // test number of items belonging to user1
         assertNotEquals(0, user1.numerOfOfferedItems());
         assertEquals(1, user1.numerOfOfferedItems());
-        
-        /*
-         *  expected: which one of te above two assertions do you expect to be true?
-         *  QUESTION:
-         *    Explain the result in terms of entity manager and persistance context.
-         */
-         
          
         assertEquals(1, item1.getSeller().numerOfOfferedItems());
 
-
         User user2 = registrationMgr.getUser(email);
         assertEquals(1, user2.numerOfOfferedItems());
-        Item item2 = sellerMgr.offerItem(user2, cat, omsch2);
+        Item item2 = sellerMgr.offerFurniture(user2, cat, omsch2, "wood");
         assertEquals(2, user2.numerOfOfferedItems());
 
         User user3 = registrationMgr.getUser(email);
@@ -73,16 +62,9 @@ public class ItemsFromSellerTest {
         User userWithItem = item2.getSeller();
         assertEquals(2, userWithItem.numerOfOfferedItems());
         assertNotEquals(3, userWithItem.numerOfOfferedItems());
-        /*
-         *  expected: which one of te above two assertions do you expect to be true?
-         *  QUESTION:
-         *    Explain the result in terms of entity manager and persistance context.
-         */
-        
-        
+
         assertSame(user3, userWithItem);
         assertEquals(user3, userWithItem);
-
     }
 
     @Test
@@ -95,7 +77,7 @@ public class ItemsFromSellerTest {
         Category cat = new Category("cat2");
 
         User user10 = registrationMgr.registerUser(email);
-        Item item10 = sellerMgr.offerItem(user10, cat, omsch1);
+        Item item10 = sellerMgr.offerPainting(user10, cat, omsch1, "This Painting", "Someone");
         Iterator<Item> it = user10.getOfferedItems();
         // testing number of items of java object
         assertTrue(it.hasNext());
@@ -106,13 +88,10 @@ public class ItemsFromSellerTest {
         assertTrue(it11.hasNext());
         it11.next();
         assertFalse(it11.hasNext());
-
-        // Explain difference in above two tests for te iterator of 'same' user
-
         
         
         User user20 = registrationMgr.getUser(email);
-        Item item20 = sellerMgr.offerItem(user20, cat, omsch2);
+        Item item20 = sellerMgr.offerPainting(user20, cat, omsch2, "This Painting", "Someone");
         Iterator<Item> it20 = user20.getOfferedItems();
         assertTrue(it20.hasNext());
         it20.next();

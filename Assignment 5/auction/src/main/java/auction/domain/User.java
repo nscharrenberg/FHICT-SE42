@@ -1,5 +1,7 @@
 package auction.domain;
 
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
 import javax.persistence.*;
 import java.util.*;
 

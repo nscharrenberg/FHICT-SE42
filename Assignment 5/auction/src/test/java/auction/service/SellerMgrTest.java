@@ -47,7 +47,7 @@ public class SellerMgrTest {
 
         User user1 = registrationMgr.registerUser("xx@nl");
         Category cat = new Category("cat1");
-        Item item1 = sellerMgr.offerItem(user1, cat, omsch);
+        Item item1 = sellerMgr.offerFurniture(user1, cat, omsch, "Dust");
         assertEquals(omsch, item1.getDescription());
         assertNotNull(item1.getId());
     }
@@ -66,14 +66,14 @@ public class SellerMgrTest {
         Category cat = new Category("cat1");
         
             // revoke before bidding
-        Item item1 = sellerMgr.offerItem(seller, cat, omsch);
+        Item item1 = sellerMgr.offerFurniture(seller, cat, omsch, "dust");
         boolean res = sellerMgr.revokeItem(item1);
         assertTrue(res);
         int count = auctionMgr.findItemByDescription(omsch).size();
         assertEquals(0, count);
         
             // revoke after bid has been made
-        Item item2 = sellerMgr.offerItem(seller, cat, omsch2);
+        Item item2 = sellerMgr.offerFurniture(seller, cat, omsch2, "dust");
         auctionMgr.newBid(item2, buyer, new Money(100, "Euro"));
         boolean res2 = sellerMgr.revokeItem(item2);
         assertFalse(res2);

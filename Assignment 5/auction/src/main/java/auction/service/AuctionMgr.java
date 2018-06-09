@@ -55,9 +55,7 @@ public class AuctionMgr  {
      */
     public Bid newBid(Item item, User buyer, Money amount) {
         Bid bid = item.newBid(buyer, amount);
-
         itemDao.edit(item);
-
         return bid;
     }
 }

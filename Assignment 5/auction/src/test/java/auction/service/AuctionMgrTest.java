@@ -48,7 +48,7 @@ public class AuctionMgrTest {
 
         User seller1 = registrationMgr.registerUser(email);
         Category cat = new Category("cat2");
-        Item item1 = sellerMgr.offerItem(seller1, cat, omsch);
+        Item item1 = sellerMgr.offerFurniture(seller1, cat, omsch, "iron");
         Item item2 = auctionMgr.getItem(item1.getId());
         assertEquals(omsch, item2.getDescription());
         assertEquals(email, item2.getSeller().getEmail());
@@ -64,8 +64,8 @@ public class AuctionMgrTest {
         User seller3 = registrationMgr.registerUser(email3);
         User seller4 = registrationMgr.registerUser(email4);
         Category cat = new Category("cat3");
-        Item item1 = sellerMgr.offerItem(seller3, cat, omsch);
-        Item item2 = sellerMgr.offerItem(seller4, cat, omsch);
+        Item item1 = sellerMgr.offerFurniture(seller3, cat, omsch, "iron");
+        Item item2 = sellerMgr.offerFurniture(seller4, cat, omsch, "iron");
 
         // List ipv ArrayList. getResultList returned List.Vector en kan niet gecast worden naar ArrayList.
         List<Item> res = (List<Item>) auctionMgr.findItemByDescription(omsch2);
@@ -89,7 +89,7 @@ public class AuctionMgrTest {
         User buyer2 = registrationMgr.registerUser(emailb2);
         // eerste bod
         Category cat = new Category("cat9");
-        Item item1 = sellerMgr.offerItem(seller, cat, omsch);
+        Item item1 = sellerMgr.offerPainting(seller, cat, omsch, "Mona Lisa", "Leonardo Da Vinci");
         Bid new1 = auctionMgr.newBid(item1, buyer, new Money(10, "eur"));
         assertEquals(emailb, new1.getBuyer().getEmail());
 
@@ -106,7 +106,7 @@ public class AuctionMgrTest {
     public void newBidTest() {
         Category cat = new Category("cat1");
         User user = registrationMgr.registerUser("test@test.io");
-        Item item = sellerMgr.offerItem(user, cat, "This is an Awesome Item");
+        Item item = sellerMgr.offerPainting(user, cat, "Awesome PAinting", "Mona Lisa", "Leonardo Da Vinci");
 
         assertEquals(1, user.numerOfOfferedItems());
         assertNull(item.getHighestBid());

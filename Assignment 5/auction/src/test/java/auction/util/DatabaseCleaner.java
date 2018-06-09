@@ -1,6 +1,7 @@
 package util;
 
 import auction.domain.*;
+import com.mysql.jdbc.Statement;
 
 import java.sql.SQLException;
 import javax.persistence.EntityManager;
@@ -9,10 +10,10 @@ import javax.persistence.metamodel.EntityType;
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
+            Item.class,
+            Bid.class,
             Furniture.class,
             Painting.class,
-            Bid.class,
-            Item.class,
             User.class
     };
     private final EntityManager em;

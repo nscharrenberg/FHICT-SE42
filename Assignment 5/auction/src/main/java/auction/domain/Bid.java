@@ -23,7 +23,7 @@ public class Bid {
 
     private Money amount;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(nullable = false)
     private Item item;
 

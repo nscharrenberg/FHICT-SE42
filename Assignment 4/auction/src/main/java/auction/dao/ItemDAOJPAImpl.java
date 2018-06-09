@@ -43,9 +43,7 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public void edit(Item item) {
-        em.getTransaction().begin();
         em.merge(item);
-        em.getTransaction().commit();
     }
 
     /**
@@ -56,8 +54,15 @@ public class ItemDAOJPAImpl implements ItemDAO {
     public Item find(Long id) throws NoResultException {
         Query query = em.createNamedQuery("Item.findById", Item.class);
         query.setParameter("id", id);
+        Item item;
 
-        return (Item) query.getSingleResult();
+        try {
+            item = (Item) query.getSingleResult();
+        } catch(NoResultException ex) {
+            throw new NoResultException("No Results found.");
+        }
+
+        return item;
     }
 
     /**
@@ -65,10 +70,7 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public List<Item> findAll() throws NoResultException {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Item.class));
-
-        return em.createQuery(cq).getResultList();
+        return em.createNamedQuery("Item.getAll", Item.class).getResultList();
     }
 
     /**

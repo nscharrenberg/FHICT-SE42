@@ -43,9 +43,7 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public void edit(Item item) {
-        em.getTransaction().begin();
         em.merge(item);
-        em.getTransaction().commit();
     }
 
     /**
@@ -72,10 +70,7 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public List<Item> findAll() throws NoResultException {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Item.class));
-
-        return em.createQuery(cq).getResultList();
+        return em.createNamedQuery("Item.getAll", Item.class).getResultList();
     }
 
     /**
