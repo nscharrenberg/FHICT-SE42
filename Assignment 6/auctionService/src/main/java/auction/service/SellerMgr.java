@@ -7,6 +7,7 @@ import auction.domain.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import nl.fontys.util.Money;
 
 public class SellerMgr {
 
@@ -44,5 +45,13 @@ public class SellerMgr {
         itemDao.create(painting);
 
         return painting;
+    }
+    
+    public Money addMoney(long cents, String currency) {
+        return new Money(cents, currency);
+    }
+    
+    public Category addCategory(String description) {
+        return new Category(description);
     }
 }
