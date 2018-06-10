@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>auction</name>
+    <name>auctionService</name>
     <dependencies>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
