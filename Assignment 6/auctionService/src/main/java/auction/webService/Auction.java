@@ -17,8 +17,8 @@ import nl.fontys.util.*;
  */
 @WebService
 public class Auction {
-    AuctionMgr auctionMgr;
-    SellerMgr sellerMgr;
+    private AuctionMgr auctionMgr;
+    private SellerMgr sellerMgr;
 
     public Auction() {
         auctionMgr = new AuctionMgr();
@@ -47,13 +47,5 @@ public class Auction {
     
     public boolean revokeItem(Item item) {
         return sellerMgr.revokeItem(item);
-    }
-    
-    public Money addMoney(long cents, String currency) {
-        return sellerMgr.addMoney(cents, currency);
-    }
-    
-    public Category addCategory(String description) {
-        return sellerMgr.addCategory(description);
     }
 }

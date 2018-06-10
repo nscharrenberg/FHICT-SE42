@@ -12,9 +12,10 @@ import javax.xml.ws.Endpoint;
  * @author Noah Scharrenberg
  */
 public class PublishWebService {
-    private static final String url = "http://localhost:8181/auction";
+    private static final String url = "http://localhost:8181/";
     
     public static void main(String[] args) { 
-        Endpoint.publish(url, new Auction());
+        Endpoint.publish(url + "auction", new Auction());
+        Endpoint.publish(url + "registration", new Registration());
     }
 }

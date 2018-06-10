@@ -46,12 +46,4 @@ public class SellerMgr {
 
         return painting;
     }
-    
-    public Money addMoney(long cents, String currency) {
-        return new Money(cents, currency);
-    }
-    
-    public Category addCategory(String description) {
-        return new Category(description);
-    }
 }
