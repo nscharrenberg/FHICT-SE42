@@ -27,23 +27,26 @@ public class SellerMgr {
         if(item.getHighestBid() != null) {
             return false;
         }
-
+        em.getTransaction().begin();
         itemDao.remove(item);
+        em.getTransaction().commit();
         return true;
     }
 
     public Furniture offerFurniture(User seller, Category category, String description, String material) {
         Furniture furniture = new Furniture(seller, category, description, material);
+        em.getTransaction().begin();
         itemDao.create(furniture);
-        seller.addItemToSeller(furniture);
+        em.getTransaction().commit();
 
         return furniture;
     }
 
     public Painting offerPainting(User seller, Category category, String description, String title, String painter) {
         Painting painting = new Painting(seller, category, description, title, painter);
+        em.getTransaction().begin();
         itemDao.create(painting);
-        seller.addItemToSeller(painting);
+        em.getTransaction().commit();
 
         return painting;
     }

@@ -10,11 +10,9 @@ import javax.persistence.metamodel.EntityType;
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
-            Item.class,
-            Bid.class,
-            Furniture.class,
-            Painting.class,
-            User.class
+        Bid.class,
+        Item.class,
+        User.class
     };
     private final EntityManager em;
 

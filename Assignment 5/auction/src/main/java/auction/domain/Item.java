@@ -33,7 +33,7 @@ public abstract class Item implements Comparable {
     private String description;
 
     @OneToOne(mappedBy = "item")
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private Bid highest;
 
     public Item() {
@@ -43,6 +43,8 @@ public abstract class Item implements Comparable {
         this.seller = seller;
         this.category = category;
         this.description = description;
+        
+        connectSeller();
     }
 
     public Long getId() {
@@ -72,6 +74,10 @@ public abstract class Item implements Comparable {
         }
         highest = new Bid(buyer, amount, this);
         return highest;
+    }
+    
+    private void connectSeller() {
+        seller.addItem(this);
     }
 
     public int compareTo(Object arg0) {

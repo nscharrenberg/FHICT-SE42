@@ -32,9 +32,7 @@ public class UserDAOJPAImpl implements UserDAO {
             throw new EntityExistsException();
         }
 
-        em.getTransaction().begin();
         em.persist(user);
-        em.getTransaction().commit();
     }
 
     @Override
@@ -66,8 +64,6 @@ public class UserDAOJPAImpl implements UserDAO {
 
     @Override
     public void remove(User user) {
-        em.getTransaction().begin();
         em.remove(user);
-        em.getTransaction().commit();
     }
 }

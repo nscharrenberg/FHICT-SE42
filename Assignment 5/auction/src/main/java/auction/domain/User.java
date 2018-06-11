@@ -53,14 +53,8 @@ public class User {
         return Collections.unmodifiableSet(this.offeredItems).size();
     }
 
-    private void addItem(Item item) {
+    void addItem(Item item) {
         this.offeredItems.add(item);
         item.setSeller(this);
-    }
-
-    public void addItemToSeller(Item item) {
-        if (item != null && !item.getDescription().isEmpty()){
-            addItem(item);
-        }
     }
 }

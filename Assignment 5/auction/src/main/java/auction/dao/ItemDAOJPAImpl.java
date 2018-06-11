@@ -31,9 +31,7 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public void create(Item item) {
-        em.getTransaction().begin();
         em.persist(item);
-        em.getTransaction().commit();
     }
 
     /**
@@ -92,8 +90,6 @@ public class ItemDAOJPAImpl implements ItemDAO {
      */
     @Override
     public void remove(Item item) {
-        em.getTransaction().begin();
         em.remove(item);
-        em.getTransaction().commit();
     }
 }
