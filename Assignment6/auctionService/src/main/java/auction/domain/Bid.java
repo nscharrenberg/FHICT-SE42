@@ -2,6 +2,7 @@ package auction.domain;
 
 import java.io.Serializable;
 import static java.lang.System.console;
+import java.util.Objects;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
@@ -11,10 +12,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity(name = "bids")
+@Entity
 @NamedQueries({
-        @NamedQuery(name = "Bid.getAll", query = "SELECT u FROM bids as u"),
-        @NamedQuery(name = "Bid.count", query = "SELECT count(u) FROM bids as u"),
+        @NamedQuery(name = "Bid.getAll", query = "SELECT u FROM Bid as u"),
+        @NamedQuery(name = "Bid.count", query = "SELECT count(u) FROM Bid as u"),
 })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -77,7 +78,36 @@ public class Bid implements Serializable {
         this.amount = amount;
     }
     
-    
-    
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bid other = (Bid) obj;
+        if (!Objects.equals(this.time, other.time)) {
+            return false;
+        }
+        if (!Objects.equals(this.buyer, other.buyer)) {
+            return false;
+        }
+        if (!Objects.equals(this.amount, other.amount)) {
+            return false;
+        }
+        return true;
+    }   
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.time);
+        hash = 79 * hash + Objects.hashCode(this.buyer);
+        hash = 79 * hash + Objects.hashCode(this.amount);
+        return hash;
+    }
 }

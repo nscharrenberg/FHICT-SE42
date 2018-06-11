@@ -90,10 +90,12 @@ public class Item implements Comparable, Serializable {
         if (highest != null && highest.getAmount().compareTo(amount) >= 0) {
             return null;
         }
+        
         highest = new Bid(buyer, amount);
         return highest;
     }
 
+    @Override
     public int compareTo(Object arg0) {
         if(arg0 instanceof Item) {
             Item oItem = (Item)arg0;
@@ -103,44 +105,28 @@ public class Item implements Comparable, Serializable {
         return -1;
     }
 
+    @Override
     public boolean equals(Object o) {
-        if(o == null) {
+        if (this == o) {
+            return true;
+        }
+        
+        if (o == null) {
             return false;
         }
-
-        if(!(o instanceof Item)) {
+        
+        if (!(o instanceof Item)) {
             return false;
         }
-
-        Item other = (Item)o;
-
-        if(this.getSeller() != other.getSeller()) {
-            return false;
-        }
-
-        if(this.getCategory() != other.getCategory()) {
-            return false;
-        }
-
-        if(!this.getDescription().equals(other.getDescription())) {
-            return false;
-        }
-
-        if(this.getHighestBid() != other.getHighestBid()) {
-            return false;
-        }
-
-        return true;
-    }
+        
+        Item other = (Item) o;
+        return id == null ? other.id == null : id.equals(other.id);
+}
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.seller);
-        hash = 79 * hash + Objects.hashCode(this.category);
-        hash = 79 * hash + Objects.hashCode(this.description);
-        hash = 79 * hash + Objects.hashCode(this.highest);
+        hash = 67 * hash + Objects.hashCode(this.id);
         return hash;
     }
    }

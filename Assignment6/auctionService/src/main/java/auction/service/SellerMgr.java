@@ -28,14 +28,18 @@ public class SellerMgr {
         if(item.getHighestBid() != null) {
             return false;
         }
-
+        em.getTransaction().begin();
         itemDao.remove(item);
+        em.getTransaction().commit();
+        
         return true;
     }
 
     public Item offerItem(User seller, Category category, String description) {
         Item item = new Item(seller, category, description);
+        em.getTransaction().begin();
         itemDao.create(item);
+        em.getTransaction().commit();
 
         return item;
     }

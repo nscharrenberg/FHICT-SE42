@@ -45,8 +45,13 @@ public class RegistrationMgr {
         if (user != null) {
             return user;
         }
+        
+        em.getTransaction().begin();
         user = new User(email);
         userDAO.create(user);
+        em.getTransaction().commit();
+        
+        
         return user;
     }
 

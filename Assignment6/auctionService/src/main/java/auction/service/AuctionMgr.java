@@ -55,7 +55,9 @@ public class AuctionMgr  {
      */
     public Bid newBid(Item item, User buyer, Money amount) {
         Bid bid = item.newBid(buyer, amount);
+        em.getTransaction().begin();
         itemDao.edit(item);
+        em.getTransaction().commit();
         return bid;
     }
 }

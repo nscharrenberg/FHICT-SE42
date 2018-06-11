@@ -20,11 +20,15 @@
 
 <xs:element name="findItemByDescriptionResponse" type="tns:findItemByDescriptionResponse"></xs:element>
 
+<xs:element name="fontysTime" type="tns:fontysTime"></xs:element>
+
 <xs:element name="getItem" type="tns:getItem"></xs:element>
 
 <xs:element name="getItemResponse" type="tns:getItemResponse"></xs:element>
 
 <xs:element name="item" type="tns:item"></xs:element>
+
+<xs:element name="money" type="tns:money"></xs:element>
 
 <xs:element name="newBid" type="tns:newBid"></xs:element>
 
@@ -87,11 +91,16 @@
 </xs:complexType>
 
 <xs:complexType name="fontysTime">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="seconds" type="xs:long"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="money">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="currency" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cents" type="xs:long"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="addCategory">
@@ -145,6 +154,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findItemByDescription">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findItemByDescriptionResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:item" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="revokeItem">
 <xs:sequence>
 <xs:element name="arg0" type="tns:item" minOccurs="0"></xs:element>
@@ -163,17 +184,5 @@
 
 <xs:complexType name="cleanDatabaseResponse">
 <xs:sequence></xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findItemByDescription">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findItemByDescriptionResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:item" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
 </xs:complexType>
 </xs:schema>
