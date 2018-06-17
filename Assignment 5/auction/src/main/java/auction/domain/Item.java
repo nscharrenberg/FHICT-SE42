@@ -1,7 +1,6 @@
 package auction.domain;
 
 import nl.fontys.util.Money;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.util.Objects;
