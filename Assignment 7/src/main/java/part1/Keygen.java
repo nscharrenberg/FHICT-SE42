@@ -1,3 +1,7 @@
+package part1;
+
+import shared.GlobalVariables;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,15 +14,6 @@ import java.util.logging.Logger;
 
 public class Keygen {
     private static final Logger logger = Logger.getLogger(Keygen.class.getName());
-    public static final String RANDOM_ALGORITHM = "SHA1PRNG";
-    public static final String ALGORITHM = "RSA";
-    public static final int BIT_SIZE = 1024;
-    public static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
-    public static final String PUBLIC_KEY_FILE = "public.txt";
-    public static final String PRIVATE_KEY_FILE = "private.txt";
-    public static final String CONTENTS_FILE = "contents.txt";
-
-
 
     public Keygen() {
 
@@ -26,20 +21,20 @@ public class Keygen {
 
     public void generateKey() {
         try {
-            SecureRandom random = SecureRandom.getInstance(RANDOM_ALGORITHM);
-            KeyPairGenerator gen = KeyPairGenerator.getInstance(ALGORITHM);
-            gen.initialize(BIT_SIZE, random);
+            SecureRandom random = SecureRandom.getInstance(GlobalVariables.RANDOM_ALGORITHM);
+            KeyPairGenerator gen = KeyPairGenerator.getInstance(GlobalVariables.ALGORITHM);
+            gen.initialize(GlobalVariables.BIT_SIZE, random);
             System.out.println("Processing... KeyPairGenerator has been initialized with a 1024 bit size.");
 
             KeyPair key = gen.genKeyPair();
             System.out.println("Processing... KeyPair has been created!");
 
             // Persist Private Key
-            persistKey(key.getPrivate().getEncoded(), PRIVATE_KEY_FILE);
+            persistKey(key.getPrivate().getEncoded(), GlobalVariables.PRIVATE_KEY_FILE);
             System.out.println("Processing... Private key has been successfully generated!");
 
             // Persist Public Key
-            persistKey(key.getPublic().getEncoded(), PUBLIC_KEY_FILE);
+            persistKey(key.getPublic().getEncoded(), GlobalVariables.PUBLIC_KEY_FILE);
             System.out.println("Processing... Public key has been successfully generated!");
 
             logger.log(Level.INFO, "Key Generation Successful. Public & Private key generated.");
