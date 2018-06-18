@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXPasswordField id="passwordTxt" fx:id="passwordTxt" layoutX="69.0" layoutY="172.0" prefHeight="25.0" prefWidth="462.0" promptText="Enter Password" />
+      <JFXButton id="encryptBtn" fx:id="encryptBtn" buttonType="RAISED" layoutX="69.0" layoutY="227.0" onAction="#encryptAction" prefHeight="55.0" prefWidth="462.0" ripplerFill="#1565c0" style="-fx-background-color: #2196F3;" text="Encrypt" textAlignment="CENTER" />
+      <JFXTextField id="fileNameTxt" fx:id="fileNameTxt" layoutX="69.0" layoutY="117.0" prefHeight="25.0" prefWidth="462.0" promptText="Enter Filename" />
+      <JFXButton id="decryptBtn" fx:id="decryptBtn" alignment="CENTER" buttonType="RAISED" layoutX="69.0" layoutY="312.0" onAction="#decryptAction" prefHeight="55.0" prefWidth="462.0" ripplerFill="#1565c0" style="-fx-background-color: #F44336;" text="Encrypt" textAlignment="CENTER" />
+      <Label layoutX="93.0" layoutY="34.0" text="Encrypter and Decrypter">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
