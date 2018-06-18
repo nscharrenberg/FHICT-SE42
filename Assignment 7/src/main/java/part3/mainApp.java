@@ -1,7 +1,7 @@
 package part3;
 
 public class mainApp {
-    private static final String FILE = "Content signed by Noah.txt";
+    private static final String FILE = "Content signed by Kevin.txt";
 
     public static void main(String[] args) {
         SignatureChecker sc = new SignatureChecker();
