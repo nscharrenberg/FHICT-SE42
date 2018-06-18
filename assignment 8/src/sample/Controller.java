@@ -2,15 +2,22 @@ package sample;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
 import java.net.URL;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller {
     @FXML
     private JFXPasswordField passwordTxt;
 
@@ -24,26 +31,39 @@ public class Controller implements Initializable {
     private JFXButton decryptBtn;
 
     @FXML
-    void decryptAction(ActionEvent event) {
+    private JFXTextArea messageTxt;
 
+    Encryptor encryptor;
+    Decryptor decryptor;
+
+    public Controller() {
+        encryptor = new Encryptor();
+        decryptor = new Decryptor();
+    }
+
+    @FXML
+    void decryptAction(ActionEvent event) {
+        try {
+            messageTxt.setText(decryptor.decrypt(passwordTxt.getText(), fileNameTxt.getText()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void encryptAction(ActionEvent event) {
-
-    }
-
-
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  <tt>null</tt> if the location is not known.
-     * @param resources The resources used to localize the root object, or <tt>null</tt> if
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+        encryptor.encrypt(messageTxt.getText(), passwordTxt.getText(), fileNameTxt.getText());
     }
 }
